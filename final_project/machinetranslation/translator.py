@@ -16,31 +16,22 @@ language_translator = LanguageTranslatorV3(
     version='2018-05-01',
     authenticator=authenticator
 )
+language_translator.set_service_url(url)
 
 def english_to_french(englishText):
     """ This function translates english to french """
 
-    # if englishText is empty, return
-    if not englishText:
-        return englishText
-
-    language_translator.set_service_url(url)
     frenchText = language_translator.translate(
         text=englishText,
         model_id='en-fr').get_result()
 
-    return frenchText
+    return frenchText.get("translations")[0].get("translation")
 
 def french_to_english(frenchText):
     """ This function translates french to english """
 
-    #if frenchText is empty, return
-    if not frenchText:
-        return frenchText
-
-    language_translator.set_service_url(url)
     englishText = language_translator.translate(
         text=frenchText,
         model_id='fr-en').get_result()
 
-    return englishText
+    return englishText.get("translations")[0].get("translation")
